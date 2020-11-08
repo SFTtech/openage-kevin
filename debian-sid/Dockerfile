@@ -29,7 +29,7 @@ EXPOSE 22
 #CMD ["/sbin/init"]
 
 # to avoid whole image rebuilds
-#RUN apt install -y something
+RUN apt install -y python3-lz4
 
 # run tini + sshd
 ENTRYPOINT ["/usr/bin/tini", "--"]
