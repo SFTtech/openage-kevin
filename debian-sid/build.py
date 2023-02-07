@@ -3,7 +3,7 @@
 import argparse
 import os
 import subprocess
-
+import getpass
 
 def main():
     cli = argparse.ArgumentParser()
@@ -18,16 +18,18 @@ def main():
         keys = fd.read()
 
     podman = [
-        f"podman build -t sft/openage:sid",
-        f'--build-arg authorized_keys="{keys}"',
+        "podman", "build", "-t", "sft/openage:sid",
+        "--build-arg", f'authorized_keys={keys}',
         f"{builddir}/.",
     ]
 
     if args.fresh:
         podman.append("--no-cache")
 
-
-    cmd = ['su', '-', 'falk', '-c', " ".join(podman)]
+    if getpass.getuser() != 'falk':
+        cmd = ['su', '-', 'falk', '-c', " ".join(podman)]
+    else:
+        cmd = podman
     print(f"$ {' '.join(cmd)}")
     subprocess.run(cmd)
 
