@@ -4,6 +4,7 @@ import argparse
 import os
 import subprocess
 import getpass
+import shlex
 
 def main():
     cli = argparse.ArgumentParser()
@@ -15,11 +16,11 @@ def main():
     print(builddir)
 
     with open("/home/kevin/.ssh/id_rsa.pub") as fd:
-        keys = fd.read()
+        keys = fd.read().strip()
 
     podman = [
         "podman", "build", "-t", "sft/openage:sid",
-        "--build-arg", f'authorized_keys={keys}',
+        "--build-arg", f"authorized_keys='{keys}'",
         f"{builddir}/.",
     ]
 
@@ -30,7 +31,7 @@ def main():
         cmd = ['su', '-', 'falk', '-c', " ".join(podman)]
     else:
         cmd = podman
-    print(f"$ {' '.join(cmd)}")
+    print(f"$ {shlex.join(cmd)}")
     subprocess.run(cmd)
 
 
