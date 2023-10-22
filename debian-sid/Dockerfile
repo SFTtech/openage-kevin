@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM debian:stable
 
 # install packages
 COPY sources.list /etc/apt/sources.list
