@@ -3,7 +3,8 @@ FROM debian:stable
 # install packages
 COPY sources.list /etc/apt/sources.list
 RUN apt update
-RUN apt install -y tini apt-utils cmake flex make git gcc g++ openssh-server clang cython3 libeigen3-dev libepoxy-dev libfontconfig1-dev libfreetype-dev libharfbuzz-dev libogg-dev libopus-dev libopusfile-dev libpng-dev libsdl2-dev libsdl2-image-dev python3-dev python3-mako python3-jinja2 python3-lz4 python3-numpy python3-pil python3-pip python3-pygments python3-pycodestyle pylint python3-toml libtoml11-dev qml6-module-qtquick-controls qt6-declarative-dev ccache kitty-terminfo
+RUN apt upgrade -y
+RUN apt install -y tini apt-utils cmake flex make git gcc g++ openssh-server clang cython3 libeigen3-dev libepoxy-dev libfontconfig1-dev libfreetype-dev libharfbuzz-dev libogg-dev libopus-dev libopusfile-dev libpng-dev libsdl2-dev libsdl2-image-dev python3-dev python3-mako python3-jinja2 python3-lz4 python3-numpy python3-pil python3-pip python3-pygments python3-pycodestyle pylint python3-toml libtoml11-dev qml6-module-qtquick-controls qt6-declarative-dev ccache kitty-terminfo qt6-multimedia-dev qml6-module-qtquick3d-spatialaudio
 
 # setup proxy
 COPY environment /etc/
