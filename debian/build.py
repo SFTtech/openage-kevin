@@ -8,6 +8,7 @@ import shlex
 
 def main():
     cli = argparse.ArgumentParser()
+    cli.add_argument("variant", choices=["sid", "stable"])
     cli.add_argument("--fresh", "-f", action="store_true")
     args = cli.parse_args()
 
@@ -18,10 +19,13 @@ def main():
     with open("/home/kevin/.ssh/id_rsa.pub") as fd:
         keys = fd.read().strip()
 
+    variant = args.variant
+
     podman = [
-        "podman", "build", "-t", "sft/openage:sid",
+        "podman", "build", "-t", f"sft/openage:{variant}",
+        "-f", f"{builddir}/{variant}/Dockerfile",
         "--build-arg", f"authorized_keys='{keys}'",
-        f"{builddir}/.",
+        f"{builddir}/{variant}/.",
     ]
 
     if args.fresh:
