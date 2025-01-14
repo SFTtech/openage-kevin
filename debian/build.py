@@ -24,7 +24,7 @@ def main():
     podman = [
         "podman", "build", "-t", f"sft/openage:{variant}",
         "-f", f"{builddir}/{variant}/Dockerfile",
-        "--build-arg", f"authorized_keys='{keys}'",
+        "--build-arg", f"authorized_keys={keys}",
         f"{builddir}/{variant}/.",
     ]
 
@@ -32,10 +32,12 @@ def main():
         podman.append("--no-cache")
 
     if getpass.getuser() != 'falk':
-        cmd = ['su', '-', 'falk', '-c', " ".join(podman)]
+        cmd = ['su', '-', 'falk', '-c', shlex.join(podman)]
+        print(f"$ {' '.join(cmd)}")
     else:
         cmd = podman
-    print(f"$ {shlex.join(cmd)}")
+        print(f"$ {shlex.join(cmd)}")
+
     subprocess.run(cmd)
 
 
