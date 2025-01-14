@@ -14,6 +14,7 @@ RUN useradd -m chantal
 RUN mkdir /home/chantal/.ssh
 WORKDIR /home/chantal
 
+RUN echo "[init]\n\tdefaultBranch = master" > /home/chantal/.gitconfig
 ARG authorized_keys
 ENV AUTHORIZED_KEYS=$authorized_keys
 RUN echo "$AUTHORIZED_KEYS" > /home/chantal/.ssh/authorized_keys && echo "$AUTHORIZED_KEYS"

@@ -6,6 +6,7 @@ import subprocess
 import getpass
 import shlex
 
+
 def main():
     cli = argparse.ArgumentParser()
     cli.add_argument("variant", choices=["sid", "stable"])
