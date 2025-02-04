@@ -32,8 +32,8 @@ def main():
     if args.fresh:
         podman.append("--no-cache")
 
-    if getpass.getuser() != 'falk':
-        cmd = ['su', '-', 'falk', '-c', shlex.join(podman)]
+    if getpass.getuser() != 'justin':
+        cmd = ['su', '-', 'justin', '-c', shlex.join(podman)]
         print(f"$ {' '.join(cmd)}")
     else:
         cmd = podman
