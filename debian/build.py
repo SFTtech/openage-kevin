@@ -9,7 +9,7 @@ import shlex
 
 def main():
     cli = argparse.ArgumentParser()
-    cli.add_argument("variant", choices=["sid", "stable"])
+    cli.add_argument("variant", choices=["sid", "testing", "stable"])
     cli.add_argument("--fresh", "-f", action="store_true")
     args = cli.parse_args()
 

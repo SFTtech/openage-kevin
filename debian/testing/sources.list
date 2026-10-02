@@ -1,0 +1,2 @@
+deb http://mirror.stusta.de/debian/ testing main contrib non-free
+deb-src http://mirror.stusta.de/debian/ testing main contrib non-free
